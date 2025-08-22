@@ -3,7 +3,7 @@ clear all;
 Sublist = importdata('/data/users/wliu/demo_dHCP_Analysis/TermList_myelin.txt');
 subj = string(Sublist.textdata);
 sess = string(Sublist.data);
-load '/3.Distance_dependence_analysis/Age_364.mat'
+load '/data/users/wliu/demo_dHCP_Analysis/Age_364.mat'
 
 %%%% geodesic distance of midthickness surafce 
 load('/data/users/wliu/demo_dHCP_Analysis/distance.mat','distance_left')  %left sphere
