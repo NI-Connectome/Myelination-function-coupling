@@ -1,8 +1,8 @@
 clc;
 clear all;
 NumSub = 364;
-load '/1.MFC_calculating/Label_7net_5k.mat'  %7net label
-load '/1.MFC_calculating/myelin.mat'  %myelin index:NumVertex*NumSub
+load '/data/users/wliu/demo_dHCP_Analysis/Label_7net_5k.mat'  %7net label
+load '/data/users/wliu/demo_dHCP_Analysis/myelin.mat'  %myelin index:NumVertex*NumSub
 Sublist = importdata('/data/users/wliu/demo_dHCP_Analysis/TermList_myelin.txt');  %subject information
 subj = string(Sublist.textdata);
 sess = string(Sublist.data);
