@@ -14,8 +14,8 @@ load '/data/users/wliu/demo_dHCP_Analysis/Label_7net_5k.mat'  %Yeo's 7net label 
 load('/data/users/wliu/demo_dHCP_Analysis/distance.mat','distance_left')  % geodesic distance matrix for left sphere
 load('/data/users/wliu/demo_dHCP_Analysis/distance.mat','distance_right')  % geodesic distance matrix for right sphere
 
-%% divide vertices into 50 compartments of equal size based on vertex-specific distance
-%%%%% vertex-specific 50 compartments for left sphere
+%% divide vertices into 50 vertex-specific parts of equal size based on vertex-to-vertex distance
+%%%%% vertex-specific 50 parts for left sphere
 for i=1:50 
     Ind_sort(i,1)=floor(2+85.8*(i-1));
     Ind_sort(i,2)=floor(2+85.8*i)-1;  % 42.9
@@ -24,10 +24,10 @@ for i=1:size(distance_left,1)
     distance_node = distance_left(i,:);
     [~,sortedInd] = sort(distance_node,'descend');
     for j=1:50
-        subnode_left{i,j} = sortedInd(Ind_sort(j,1):Ind_sort(j,2));  % vertex-specific 50 compartments
+        subnode_left{i,j} = sortedInd(Ind_sort(j,1):Ind_sort(j,2));  % vertex-specific 50 parts
     end
 end
-%%%%% vertex-specific 50 compartments for right sphere
+%%%%% vertex-specific 50 parts for right sphere
 for i=1:50
     Ind_sort(i,1)=floor(2+85.94*(i-1));
     Ind_sort(i,2)=floor(2+85.94*i)-1;    % 42.97
@@ -36,11 +36,11 @@ for i=1:size(distance_right,1)
     distance_node = distance_right(i,:);
     [~,sortedInd] = sort(distance_node,'descend');
     for j=1:50
-        subnode_right{i,j} = sortedInd(Ind_sort(j,1):Ind_sort(j,2));  % vertex-specific 50 compartments
+        subnode_right{i,j} = sortedInd(Ind_sort(j,1):Ind_sort(j,2));  % vertex-specific 50 parts
     end
 end
 
-%% culculate MFC of vertex-specific 50 compartments
+%% culculate MFC of vertex-specific 50 parts
 for k=1:364
     FCname=sprintf('/data/users/wliu/demo_dHCP_Analysis/sub-%s/ses-%s/sub_FC.mat',subj(k),sess(k));
     load(FCname);  % load individual-specific FC
@@ -65,12 +65,12 @@ for k=1:364
 
     for i=1:size(distance_left,1)
         for j=1:50
-        subnode_left_now = subnode_left{i,j};  % vertex-specific compartment
+        subnode_left_now = subnode_left{i,j};  % vertex-specific part
         MCNg_left = gMC(i,subnode_left_now)';
         MCNs_left = MCN(i,subnode_left_now)';
         FCs_left = FC(i,subnode_left_now)';
         X_MCN = double([ones(size(MCNg_left,1),1),zscore(MCNg_left),zscore(MCNs_left)]);
-        [~,~,~,~,stats] = regress(FCs_left,X_MCN);   % MFC of each compartment
+        [~,~,~,~,stats] = regress(FCs_left,X_MCN);   % MFC of each part
         MFC_gss_left(i,k,j) = stats(1);
         MFC_gss_left(i,k,j) = 1-(8588-1)/(8588-2-1)*(1-MFC_gss_left(i,k,j))% the adjusted coefficient of determination
         end
@@ -78,12 +78,12 @@ for k=1:364
 
     for i=1:size(distance_right,1)
         for j=1:50
-        subnode_right_now = subnode_right{i,j};   % vertex-specific compartment
+        subnode_right_now = subnode_right{i,j};   % vertex-specific part
         MCNg_right = gMC(i+4291,subnode_right_now+4291)';
         MCNs_right = MCN(i+4291,subnode_right_now+4291)';
         FCs_right = FC(i+4291,subnode_right_now+4291)';
         X_MCN = double([ones(size(MCNg_right,1),1),zscore(MCNg_right),zscore(MCNs_right)]);
-        [~,~,~,~,stats] = regress(FCs_right,X_MCN);    % MFC of each compartment
+        [~,~,~,~,stats] = regress(FCs_right,X_MCN);    % MFC of each part
         MFC_gss_right(i,k,j) = stats(1);
         MFC_gss_right(i,k,j) = 1-(8588-1)/(8588-2-1)*(1-MFC_gss_right(i,k,j))% the adjusted coefficient of determination
         end
@@ -94,7 +94,7 @@ end
 
 %% average MFC across-sub
 for j=1:50
-MFC_gss_left_mean(:,j) = mean(MFC_gss_left(:,:,j),2);   % group-mean MFC of each compartment
+MFC_gss_left_mean(:,j) = mean(MFC_gss_left(:,:,j),2);   % group-mean MFC of each part
 MFC_gss_right_mean(:,j) = mean(MFC_gss_right(:,:,j),2);
 end
 
@@ -105,8 +105,8 @@ for i=1:50
         for k=1:364
             MFC_gss_current_left(:,1) = MFC_gss_left(:,k,i);
             MFC_gss_current_right(:,1) = MFC_gss_right(:,k,i);
-            MFC_NetMedian_indiv_50_left(i,j,k) = median(MFC_gss_current_left(find(net(1:4291) == j)),1);  % net_median MFC of each compartment
-            MFC_NetMedian_indiv_50_right(i,j,k) = median(MFC_gss_current_right(find(net(4292:8589) == j)),1);  % net_median MFC of each compartment
+            MFC_NetMedian_indiv_50_left(i,j,k) = median(MFC_gss_current_left(find(net(1:4291) == j)),1);  % net_median MFC of each part
+            MFC_NetMedian_indiv_50_right(i,j,k) = median(MFC_gss_current_right(find(net(4292:8589) == j)),1);  % net_median MFC of each part
         end
     end
 end
