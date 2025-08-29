@@ -15,7 +15,7 @@ Use GAM model to investigate linear and nonlinear relationships between MFC and 
 ### <3.Distance_dependence_analysis>: 
 Investigate the distance dependence of MFC ('Distance_dependence_analysis.m') by dividing vertices into multiple vertex-specific parts, then recalculating MFC for each part.
 
-### The following analyses were carried out using open source packages:
+## The following analyses were carried out using open source packages:
 
 ### 1.Spin test: 
 The spin test was conducted using an open Matlab code package (https://github.com/frantisekvasa/rotate_parcellation).
