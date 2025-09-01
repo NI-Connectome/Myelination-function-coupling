@@ -26,7 +26,7 @@ for (i in 1:nrow(GAM_data$MFC_gs)) {
   fit_GAM <- gam(current_MFC ~ s(PMA, bs="tp", k=3), data=current_GAM_data, method="REML")  # GAM model: thin plate regression splined
   summary_model <- summary(fit_GAM)  # GAM model fitting result
   Pvalue_all[i,1] = summary_model$s.table[1,4] 
-  deriv <- derivatives(fit_GAM, term='s(PMA)', order=1)  # the first derivative of th eage smooth function
+  deriv <- derivatives(fit_GAM, term='s(PMA)', order=1)  # the first derivative of the age smooth function
   derivs[i,1] <- mean(deriv$.derivative)   #average derivative: growth rate
 }
 write.table(Pvalue_all,"YourPath/result/Pvalue_gs.csv",row.names=F, col.names=F)
