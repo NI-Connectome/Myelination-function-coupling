@@ -7,7 +7,7 @@ This repository provides core code and relevant toolboxes for data analysis in t
 The dHCP anatomical data surface-based preprocessing program 'dHCP_Term_anat.sh' includes registration, resampling and smoothing. dHCP fucntional data surface-based preprocessing program 'dHCP_Term_func.sh' includes volume-mapping, registration, resampling, smoothing and calculating functional connectome. After preprocessing, all data are ultimately alighed to the HCP-YA fs_LR space, and down-sampled to 5k_fs_LR mesh.
 
 ### <1.MFC_calculating>: 
-Use 'MFC_calculating.m' to Calculate the vertex-level MFC/gMFC/sMFC for the demo dHCP subject (ID:sub-CC00056XX07 ses-10700), the demo data is provided in a subfolder 'data', and the results of demo data are stored in another subfolder 'result'.
+Use 'MFC_calculating.m' to Calculate the vertex-level MFC/gMFC/sMFC for the demo dHCP subject (ID: sub-CC00056XX07 ses-10700), the demo data is provided in a subfolder 'data', and the results of demo data are stored in another subfolder 'result'.
 
 ### <2.Growth_effect_analysis>: 
 Use 'Growth_effect_analysis.R' to investigate linear and nonlinear relationships between MFC and age, the required data is provided in a subfolder 'data', and the results are stored in another subfolder 'result'.
