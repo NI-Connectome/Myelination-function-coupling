@@ -1,4 +1,4 @@
-This folder contains the code required to calculate MFC, demo data to support the code, and the calculation results for demo data.
+This folder contains the code required to calculate MFC, demo data to support the code, and the calculation results for he demo dHCP subject (ID:sub-CC00056XX07 ses-10700).
 
 Specifically,
 
